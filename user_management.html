@@ -325,8 +325,7 @@
               // kecuali admin
               const userData = doc.data();
               if (
-                userData.EMAIL !== "admin@admin.com" &&
-                userData.TOTAL_SCORE !== 0 && typeof userData.TOTAL_SCORE === "number"
+                userData.EMAIL !== "admin@admin.com"  && typeof userData.TOTAL_SCORE === "number"
               ) {
                 // Memeriksa email
                 questions.push(userData);
