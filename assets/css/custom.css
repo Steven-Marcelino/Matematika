@@ -1,0 +1,164 @@
+body {
+  background-color: #fbfbfb;
+}
+@media (min-width: 991.98px) {
+  main {
+    padding-left: 240px;
+  }
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding: 58px 0 0; /* Height of navbar */
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+  width: 240px;
+  z-index: 600;
+}
+
+@media (max-width: 991.98px) {
+  .sidebar {
+    width: 100%;
+  }
+}
+.sidebar .active {
+  border-radius: 5px;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: 0.5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+/* Tambahkan garis vertikal di antara kolom-kolom tabel */
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table th,
+.table td {
+  border: 1px solid #000; /* Warna garis vertikal dan horizontal */
+  padding: 8px;
+  text-align: left;
+  max-width: 250px;
+}
+
+.table th {
+  background-color: #f2f2f2; /* Warna latar belakang header */
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.dropdown {
+  margin-bottom: 20px;
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+#nextButton {
+  padding: 5px 30px;
+  margin: 0 30px;
+  cursor: pointer;
+  border-radius: 15px;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: white;
+}
+
+#nextButton[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background-color: #4672b4;
+  border-color: #405e8c;
+  color: white
+}
+
+#prevButton {
+  padding: 5px 30px;
+  margin: 0 5px;
+  margin-right: 30px;
+  cursor: pointer;
+  border-radius: 15px;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: white;
+}
+
+#prevButton[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background-color: #4672b4;
+  border-color: #405e8c;
+  color: white;
+}
+
+
+/* Style untuk tombol Hapus */
+button.delete-button {
+  background: linear-gradient(to bottom, #ff5555, #cc0000); /* Efek gradient dari merah ke merah tua */
+  color: white; /* Warna teks putih */
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin-right: 4px; /* Jarak antara tombol */
+}
+
+/* Style untuk tombol Edit */
+button.edit-button {
+  background: linear-gradient(to bottom, #00cc00, #009900); /* Efek gradient dari hijau ke hijau tua */
+  color: white; /* Warna teks putih */
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+#tambah_user {
+  margin-left: 20px;
+  background: linear-gradient(to bottom, #006dcc, #000399); /* Efek gradient dari hijau ke hijau tua */
+  color: white; /* Warna teks putih */
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Style untuk tombol ketika dihover */
+button:hover {
+  opacity: 0.8;
+}
