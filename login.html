@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>AdminMatematika</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="assets/image/logo_mate.jpg" />
+  </head>
+  <style media="screen">
+    body {
+      background-image: url(assets/image/bg.png);
+      background-repeat: repeat;
+      background-size: cover;
+    }
+
+    #backlogin {
+      background: white;
+      width: 100%;
+      max-width: 350px;
+      height: 350px;
+      border: 1px solid #d2d2d2;
+      border-radius: 5px;
+      margin-top: 150px;
+    }
+
+    @font-face {
+      src: url("font/Product Sans Regular.ttf");
+      font-family: Product Sans;
+    }
+
+    @font-face {
+      src: url("font/OpenSans-Light.ttf");
+      font-family: OpenSans-Light;
+    }
+
+    #backlogin form {
+      margin-top: 15px;
+      float: left;
+      padding: 5px;
+    }
+
+    #backlogin .inputa {
+      margin-bottom: 10px;
+      width: 90%;
+      margin-top: 1px;
+      height: 50px;
+      border: 0px;
+      border-bottom: 1px solid #6a82fb;
+      font-size: 16px;
+      font-family: OpenSans-Light;
+      background: transparent;
+    }
+
+    #backlogin .wed {
+      margin-top: 40px;
+      width: 45%;
+      height: 40px;
+      background: #6a82fb;
+      border: none;
+      color: white;
+      font-family: product sans;
+      font-size: 20px;
+      border-radius: 5px;
+    }
+
+    #backlogin h1 {
+      text-align: center;
+      padding: 5px;
+      color: #6a82fb;
+      font-family: Product Sans;
+    }
+
+    #backlogin hr {
+      width: 50%;
+      height: 4px;
+      border: none;
+      background: #6a82fb;
+    }
+    input[type="email"],
+    select {
+      border: 1px solid #ccc; /* Warna default border */
+      transition: border-color 0.3s; /* Animasi perubahan warna border */
+    }
+
+    input[type="email"]:focus,
+    select:focus {
+      border-color: #007bff; /* Warna border saat dalam keadaan focus */
+      outline: none; /* Hilangkan outline bawaan browser */
+    }
+
+    input[type="password"],
+    select {
+      border: 1px solid #ccc; /* Warna default border */
+      transition: border-color 0.3s; /* Animasi perubahan warna border */
+    }
+
+    input[type="password"]:focus,
+    select:focus {
+      border-color: #007bff; /* Warna border saat dalam keadaan focus */
+      outline: none; /* Hilangkan outline bawaan browser */
+    }
+  </style>
+
+  <body>
+    <center>
+      <!-- <img src="assets/image/logo_mate.jpg" style="width: 20px;" alt=""> -->
+      <div id="backlogin">
+        <h1>Matematika</h1>
+        <hr style="border-radius: 50px" />
+        <form>
+          <input
+            type="email"
+            class="inputa"
+            name=""
+            value=""
+            id="email"
+            placeholder="Masukan Username"
+            required
+            style="border-radius: 7px; padding-left: 10px"
+          />
+          <input
+            type="password"
+            class="inputa"
+            name=""
+            id="password"
+            value=""
+            placeholder="Masukan password"
+            required
+            style="border-radius: 7px; padding-left: 10px"
+          />
+          <button type="button" class="wed" onclick="login()" id="loginBtn">Login</button>
+          <input type="reset" class="wed" name="" value="Reset" />
+        </form>
+      </div>
+    </center>
+
+    <!-- Tambahkan link Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <!-- Tambahkan konfigurasi Firebase Anda di sini -->
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyCEP9xiVWHYg4oXcqIoImbgb0ma_Dhd55U",
+        authDomain: "mastermatematika-91bae.firebaseapp.com",
+        databaseURL:
+          "https://mastermatematika-91bae-default-rtdb.firebaseio.com",
+        projectId: "mastermatematika-91bae",
+        storageBucket: "mastermatematika-91bae.appspot.com",
+        messagingSenderId: "609139117081",
+        appId: "1:609139117081:web:092ab7a617518799d2ae88",
+      };
+      // Inisialisasi Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script>
+      function setLoadingState() {
+        const insBtn = document.getElementById("loginBtn");
+        insBtn.disabled = true; // Menonaktifkan tombol
+        insBtn.textContent = "loading..."; // Mengubah teks tombol
+      }
+
+      // Ganti elemen button dan teks kembali setelah selesai
+      function resetButtonState() {
+        const insBtn = document.getElementById("loginBtn");
+        insBtn.disabled = false; // Mengaktifkan tombol kembali
+        insBtn.textContent = "Login"; // Mengubah teks tombol kembali
+      }
+
+      // Fungsi untuk melakukan login
+      function login() {
+        setLoadingState();
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            // Login sukses, Anda dapat mengakses userCredential.user
+            var user = userCredential.user;
+            localStorage.setItem("userId", user.uid); // Simpan ID pengguna
+            // localStorage.setItem('userId', user.nama);
+            // Pengecekan apakah pengguna adalah admin
+            // Pengecekan apakah pengguna adalah admin
+            if (user.email === "admin@admin.com") {
+              window.location.replace("index.html");
+              resetButtonState();
+            } else {
+              alert("Email dan password tidak cocok");
+              resetButtonState();
+            }
+            // alert("Login berhasil. Selamat datang, " + user.email);
+          })
+          .catch((error) => {
+            // Handle error
+            resetButtonState();
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert("Login gagal");
+          });
+      }
+    </script>
+  </body>
+</html>

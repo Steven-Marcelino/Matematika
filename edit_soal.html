@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AdminMatematika</title>
+    <link rel="icon" type="image/x-icon" href="assets/image/logo_mate.jpg" />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <header>
+      <!-- Sidebar -->
+      <nav
+        id="sidebarMenu"
+        class="collapse d-lg-block sidebar collapse bg-white"
+      >
+        <div class="position-sticky">
+          <div class="list-group list-group-flush mx-3 mt-4">
+            <a
+              href="index.html"
+              class="list-group-item list-group-item-action py-2 ripple"
+              aria-current="true"
+            >
+              <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Home</span>
+            </a>
+            <a
+     
+              class="list-group-item list-group-item-action py-2 ripple active"
+              style="border: none"
+            >
+              <i class="fas fa-solid fa-book fa-fw me-3"></i
+              ><span>Bank Soal</span>
+            </a>
+            <a href="tambah_soal.html" class="list-group-item list-group-item-action py-2 ripple "
+              ><i class="fas fa-plus-circle fa-fw me-3"></i
+              ><span>Tambah Soal</span></a
+            >
+
+            <a
+              href="ranking.html"
+              class="list-group-item list-group-item-action py-2 ripple "
+              style="border: none"
+              ><i class="fas fa-chart-line fa-fw me-3"></i
+              ><span>Ranking</span></a
+            >
+
+            <a
+              href="user_management.html"
+              class="list-group-item list-group-item-action py-2 ripple"
+              ><i class="fas fa-solid fa-users fa-fw me-3"></i
+              ><span>User Management</span></a
+            >
+          </div>
+        </div>
+      </nav>
+      <!-- Sidebar -->
+
+      <!-- Navbar -->
+      <nav
+        id="main-navbar"
+        class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
+        style="box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1)"
+      >
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+          <!-- Toggle button -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#sidebarMenu"
+            aria-controls="sidebarMenu"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <!-- Brand -->
+          <a class="navbar-brand" href="#">
+            <img
+              src="assets/image/logo_mate.jpg"
+              height="40"
+              style="border-radius: 5px"
+              alt="Logo"
+              loading="lazy"
+            />
+          </a>
+          <!-- Search form -->
+          <!-- <form class="d-none d-md-flex input-group w-auto my-auto">
+          <input autocomplete="off" type="search" class="form-control rounded"
+            placeholder='Search (ctrl + "/" to focus)' style="min-width: 225px;" />
+          <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
+        </form> -->
+
+          <!-- Right links -->
+          <ul class="navbar-nav ms-auto d-flex flex-row">
+            <!-- Notification dropdown -->
+            <div
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding-right: 10px;
+              "
+            >
+              <span style="text-align: center">Admin</span>
+            </div>
+
+            <!-- Avatar -->
+            <li class="nav-item dropdown" style="margin-bottom: 0px !important">
+              <a
+                class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
+                href="#"
+                id="navbarDropdownMenuLink"
+                role="button"
+                data-mdb-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  src="https://disk.mediaindonesia.com/files/news/2022/11/03/wa9.jpg"
+                  class="rounded-circle"
+                  height="22"
+                  alt="Avatar"
+                  loading="lazy"
+                />
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="navbarDropdownMenuLink"
+                style="left: -140px"
+              >
+                <!-- <li>
+                  <a class="dropdown-item" href="#">My profile</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">Settings</a>
+                </li> -->
+                <li>
+                  <a class="dropdown-item" href="#" id="logoutButton">Logout</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- Container wrapper -->
+      </nav>
+      <!-- Navbar -->
+    </header>
+
+    <main style="margin-top: 58px">
+      <div class="container pt-4" style="text-align: left">
+        <div class="my-3">
+          <div class="card">
+            <div class="card-body">
+              <h3>Tambah Soal</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="row d-flex justify-content-center mb-4">
+          <div class="col-xl-5 col-lg-6 col-md-8 col-sm-12">
+            <div class="card">
+              <div class="card-header">
+                <h4>Tambahakan Bank Soal</h4>
+              </div>
+
+              <form id="editForm">
+              <div class="card-body">
+                <div class="mb-3">
+                  <label for="" class="form-label">Soal</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="question"
+                    name="question"
+                    required
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="" class="form-label">Jawaban A</label>
+                  <input type="text" class="form-control" id="a" name="a" required/>
+                </div>
+
+                <div class="mb-3">
+                  <label for="" class="form-label">Jawaban B</label>
+                  <input type="text" class="form-control" id="b" name="b" required />
+                </div>
+
+                <div class="mb-3">
+                  <label for="" class="form-label">Jawaban C</label>
+                  <input type="text" class="form-control" id="c" name="c" required />
+                </div>
+
+                <div class="mb-3">
+                  <label for="" class="form-label">Jawaban D</label>
+                  <input type="text" class="form-control" id="d" name="d" required/>
+                </div>
+
+                <div class="mb-3">
+                  <label for="" class="form-label">Jawaban Benar</label>
+                  <select class="form-select" id="answer" name="answer" required>
+                    <option selected disabled value="">
+                      Pilih Jawaban Yang Benar...
+                    </option>
+                    <option value="1">A</option>
+                    <option value="2">B</option>
+                    <option value="3">C</option>
+                    <option value="4">D</option>
+                    <!-- Tambahkan lebih banyak opsi sesuai kebutuhan -->
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label for="" class="form-label">Kategori Soal</label>
+                  <select class="form-select" id="test" name="test" required>
+                    <option selected disabled value="">
+                      Pilih Kategori Soal...
+                    </option>
+                    <option value="AAAA">MTK 3</option>
+                    <option value="BBBB">MTK 4</option>
+                    <option value="CCCC">MTK 5</option>
+                    <option value="DDDD">MTK 6</option>
+                    <!-- Tambahkan lebih banyak opsi sesuai kebutuhan -->
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="" class="form-label">Test Soal</label>
+                    <select class="form-select" id="category" name="category" required>
+                      <option selected disabled value="">
+                        Pilih Test Soal...
+                      </option>
+                      <!-- <option value="1">MTK 1</option>
+                                          <option value="2">MTK 2</option> -->
+                      <option value="uyRtfhHmCh5ZSWdAX4ve">Test No : 1</option>
+                      <option value="8lHPh2s2UuohGz80mV7M">Test No : 2</option>
+                      <option value="5bH7DElxluSiNFiqUFlU">Test No : 3</option>
+                      <option value="vqr8qUCFpSJK3Cf4ylxa">Test No : 4</option>
+                      <!-- Tambahkan lebih banyak opsi sesuai kebutuhan -->
+                    </select>
+                  </div>
+
+                  <button type="submit" id="Updbtn" class="btn btn-primary">Simpan Perubahan</button>
+                </div>
+
+
+            </form>
+                <!-- <button id="Selbtn" class="btn btn-primary">Select</button>
+                <button id="Updbtn" class="btn btn-primary">Update</button>
+                <button id="Delbtn" class="btn btn-primary">Delete</button> -->
+
+                <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+                <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-firestore.js"></script>
+                <script>
+                  // Inisialisasi Firebase SDK
+                  const firebaseConfig = {
+                    apiKey: "AIzaSyCEP9xiVWHYg4oXcqIoImbgb0ma_Dhd55U",
+                    authDomain: "mastermatematika-91bae.firebaseapp.com",
+                    databaseURL:
+                      "https://mastermatematika-91bae-default-rtdb.firebaseio.com",
+                    projectId: "mastermatematika-91bae",
+                    storageBucket: "mastermatematika-91bae.appspot.com",
+                    messagingSenderId: "609139117081",
+                    appId: "1:609139117081:web:092ab7a617518799d2ae88",
+                  };
+
+                  firebase.initializeApp(firebaseConfig);
+                  const db = firebase.firestore();
+
+                  // Dapatkan Document ID dari query parameter
+                  const urlParams = new URLSearchParams(window.location.search);
+                  const documentId = urlParams.get("documentId");
+
+                  const questionRef = db.collection("Questions").where("QUESTION", "==", documentId)
+
+                  // Dapatkan data soal berdasarkan QUESTION yang sama dengan documentId
+                  db.collection("Questions")
+                    .where("QUESTION", "==", documentId)
+                    .get()
+                    .then((querySnapshot) => {
+                      querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        const docId = doc.id;
+                        // Isi formulir input dengan data yang diambil dari Firebase
+                        document.getElementById("question").value =
+                          data.QUESTION || "";
+                        document.getElementById("a").value =
+                          data.A || "";
+                        document.getElementById("b").value =
+                          data.B || "";
+                        document.getElementById("c").value =
+                          data.C || "";
+                        document.getElementById("d").value =
+                          data.D || "";
+                        document.getElementById("answer").value =
+                          data.ANSWER || "";
+                          document.getElementById("test").value =
+                          data.TEST || "";
+
+                          document.getElementById("category").value =
+                          data.CATEGORY || "";
+
+
+
+                              // Tangani pengiriman formulir edit
+                              function setLoadingState() {
+                    const insBtn = document.getElementById("Updbtn");
+                    insBtn.disabled = true; // Menonaktifkan tombol
+                    insBtn.textContent = "Tunggu Sebentar..."; // Mengubah teks tombol
+                  }
+
+                  // Ganti elemen button dan teks kembali setelah selesai
+                  function resetButtonState() {
+                    const insBtn = document.getElementById("Updbtn");
+                    insBtn.disabled = false; // Mengaktifkan tombol kembali
+                    insBtn.textContent = "Simpan Perubahan"; // Mengubah teks tombol kembali
+                  }
+                  const editForm = document.getElementById("editForm");
+                  editForm.addEventListener("submit", function (e) {
+                    e.preventDefault();
+
+                    // Dapatkan nilai dari formulir input
+                    const editedQuestion =
+                      document.getElementById("question").value;
+                    const editedOptionA =
+                      document.getElementById("a").value;
+                    const editedOptionB =
+                      document.getElementById("b").value;
+                    const editedOptionC =
+                      document.getElementById("c").value;
+                    const editedOptionD =
+                      document.getElementById("d").value;
+                    const editedAnswer = parseInt(
+                      document.getElementById("answer").value
+                    );
+                    const editedTest =
+                      document.getElementById("test").value;
+                    const editedCategory =
+                      document.getElementById("category").value;
+
+                    // Lakukan validasi data jika diperlukan
+
+                     // Simpan perubahan ke Firebase Firestore
+                     setLoadingState();
+                       db.collection("Questions")
+                         .doc(docId)
+                         .set({
+                           QUESTION: editedQuestion,
+                           A: editedOptionA,
+                           B: editedOptionB,
+                           C: editedOptionC,
+                           D: editedOptionD,
+                           ANSWER: editedAnswer,
+                           TEST: editedTest,
+                           CATEGORY: editedCategory,
+                         })
+                         .then(() => {
+                            alert("Data berhasil diperbarui");
+                             // Redirect kembali ke halaman bank_soal.html
+                             window.location.href = "bank_soal.html";
+                             resetButtonState();
+                         })
+                      .catch((error) => {
+                        console.error("Gagal memperbarui data: ", error);
+                        resetButtonState();
+                      });
+
+                  });
+
+                      });
+                    })
+                    .catch((error) => {
+                      console.error("Error saat mengambil data soal:", error);
+                      resetButtonState();
+                    });
+
+              
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+
+  <script>
+    // Membuat fungsi logout
+    function logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          // Logout berhasil, hapus informasi autentikasi dari LocalStorage
+          localStorage.removeItem("userId");
+          // Redirect atau lakukan tindakan lain, misalnya, arahkan ke halaman login
+          window.location.replace("login.html");
+        })
+        .catch((error) => {
+          // Handle error
+        });
+    }
+
+    // Panggil fungsi logout saat pengguna mengklik tombol logout atau tautan logout
+    document.getElementById("logoutButton").addEventListener("click", logout);
+  </script>
+
+  <script>
+    // Ambil elemen dropdown
+    const dropdownToggle = document.getElementById("navbarDropdownMenuLink");
+
+    // Tambahkan event listener untuk mengaktifkan dropdown
+    dropdownToggle.addEventListener("click", function () {
+      const dropdownMenu = this.nextElementSibling;
+      if (dropdownMenu.style.display === "block") {
+        dropdownMenu.style.display = "none";
+      } else {
+        dropdownMenu.style.display = "block";
+      }
+    });
+
+    // Tambahkan event listener untuk menutup dropdown saat mengklik di luar dropdown
+    document.addEventListener("click", function (e) {
+      if (!dropdownToggle.contains(e.target)) {
+        const dropdownMenus = document.querySelectorAll(".dropdown-menu");
+        dropdownMenus.forEach(function (menu) {
+          menu.style.display = "none";
+        });
+      }
+    });
+  </script>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AdminMatematika</title>
+  </head>
+  <body>
+    <h1>Edit Soal</h1>
+    <form id="editForm">
+      <input type="text" id="editedQuestion" placeholder="Pertanyaan" />
+      <input type="text" id="editedOptionA" placeholder="Opsi A" />
+      <input type="text" id="editedOptionB" placeholder="Opsi B" />
+      <input type="text" id="editedOptionC" placeholder="Opsi C" />
+      <input type="text" id="editedOptionD" placeholder="Opsi D" />
+      <input type="text" id="editedAnswer" placeholder="Jawaban (1-4)" />
+      <button type="submit">Simpan Perubahan</button>
+    </form>
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-firestore.js"></script>
+    <script>
+      // Inisialisasi Firebase SDK
+      const firebaseConfig = {
+        apiKey: "AIzaSyCEP9xiVWHYg4oXcqIoImbgb0ma_Dhd55U",
+        authDomain: "mastermatematika-91bae.firebaseapp.com",
+        databaseURL:
+          "https://mastermatematika-91bae-default-rtdb.firebaseio.com",
+        projectId: "mastermatematika-91bae",
+        storageBucket: "mastermatematika-91bae.appspot.com",
+        messagingSenderId: "609139117081",
+        appId: "1:609139117081:web:092ab7a617518799d2ae88",
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+      // Dapatkan Document ID dari query parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const documentId = urlParams.get("documentId");
+
+      // Dapatkan data soal berdasarkan QUESTION yang sama dengan documentId
+      db.collection("Questions")
+        .where("QUESTION", "==", documentId)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            // Isi formulir input dengan data yang diambil dari Firebase
+            document.getElementById("editedQuestion").value =
+              data.QUESTION || "";
+            document.getElementById("editedOptionA").value = data.A || "";
+            document.getElementById("editedOptionB").value = data.B || "";
+            document.getElementById("editedOptionC").value = data.C || "";
+            document.getElementById("editedOptionD").value = data.D || "";
+            document.getElementById("editedAnswer").value = data.ANSWER || "";
+          });
+        })
+        .catch((error) => {
+          console.error("Error saat mengambil data soal:", error);
+        });
+
+      // Tangani pengiriman formulir edit
+      const editForm = document.getElementById("editForm");
+      editForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Dapatkan nilai dari formulir input
+        const editedQuestion = document.getElementById("editedQuestion").value;
+        const editedOptionA = document.getElementById("editedOptionA").value;
+        const editedOptionB = document.getElementById("editedOptionB").value;
+        const editedOptionC = document.getElementById("editedOptionC").value;
+        const editedOptionD = document.getElementById("editedOptionD").value;
+        const editedAnswer = parseInt(
+          document.getElementById("editedAnswer").value
+        );
+
+        // Lakukan validasi data jika diperlukan
+
+        // Simpan perubahan ke Firebase Firestore
+        questionRef
+          .update({
+            QUESTION: editedQuestion,
+            A: editedOptionA,
+            B: editedOptionB,
+            C: editedOptionC,
+            D: editedOptionD,
+            ANSWER: editedAnswer,
+          })
+          .then(() => {
+            console.log("Data berhasil diperbarui");
+            // Redirect kembali ke halaman lain jika diperlukan
+          })
+          .catch((error) => {
+            console.error("Gagal memperbarui data: ", error);
+          });
+      });
+    </script>
+  </body>
+</html>

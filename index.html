@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AdminMatematika</title>
+    <link rel="icon" type="image/x-icon" href="assets/image/logo_mate.jpg" />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!--Main Navigation-->
+    <!--Main Navigation-->
+    <header>
+      <!-- Sidebar -->
+      <nav
+        id="sidebarMenu"
+        class="collapse d-lg-block sidebar collapse bg-white"
+      >
+        <div class="position-sticky">
+          <div class="list-group list-group-flush mx-3 mt-4">
+            <a
+              class="list-group-item list-group-item-action py-2 ripple active"
+              aria-current="true"
+            >
+              <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Home</span>
+            </a>
+            <a
+              href="bank_soal.html"
+              class="list-group-item list-group-item-action py-2 ripple"
+              style="border: none"
+            >
+              <i class="fas fa-solid fa-book fa-fw me-3"></i
+              ><span>Bank Soal</span>
+            </a>
+            <a
+              href="tambah_soal.html"
+              class="list-group-item list-group-item-action py-2 ripple"
+              ><i class="fas fa-plus-circle fa-fw me-3"></i
+              ><span>Tambah Soal</span></a
+            >
+
+            <a
+              href="ranking.html"
+              class="list-group-item list-group-item-action py-2 ripple"
+              style="border: none"
+              ><i class="fas fa-chart-line fa-fw me-3"></i
+              ><span>Ranking</span></a
+            >
+
+            <a
+              href="user_management.html"
+              class="list-group-item list-group-item-action py-2 ripple"
+              ><i class="fas fa-solid fa-users fa-fw me-3"></i
+              ><span>User Management</span></a
+            >
+          </div>
+        </div>
+      </nav>
+      <!-- Sidebar -->
+
+      <!-- Navbar -->
+      <nav
+        id="main-navbar"
+        class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
+        style="box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1)"
+      >
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+          <!-- Toggle button -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#sidebarMenu"
+            aria-controls="sidebarMenu"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <!-- Brand -->
+          <a class="navbar-brand" href="#">
+            <img
+              src="assets/image/logo_mate.jpg"
+              height="40"
+              style="border-radius: 5px"
+              alt="Logo"
+              loading="lazy"
+            />
+          </a>
+          <!-- Search form -->
+          <!-- <form class="d-none d-md-flex input-group w-auto my-auto">
+        <input autocomplete="off" type="search" class="form-control rounded"
+          placeholder='Search (ctrl + "/" to focus)' style="min-width: 225px;" />
+        <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
+      </form> -->
+
+          <!-- Right links -->
+          <ul class="navbar-nav ms-auto d-flex flex-row">
+            <!-- Notification dropdown -->
+            <div
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding-right: 10px;
+              "
+            >
+              <span style="text-align: center">Admin</span>
+            </div>
+
+            <!-- Avatar -->
+            <li class="nav-item dropdown" style="margin-bottom: 0px !important">
+              <a
+                class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
+                href="#"
+                id="navbarDropdownMenuLink"
+                role="button"
+                data-mdb-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  src="https://disk.mediaindonesia.com/files/news/2022/11/03/wa9.jpg"
+                  class="rounded-circle"
+                  height="22"
+                  alt="Avatar"
+                  loading="lazy"
+                />
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="navbarDropdownMenuLink"
+                style="left: -140px"
+              >
+                <!-- <li>
+                  <a class="dropdown-item" href="#">My profile</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">Settings</a>
+                </li> -->
+                <li>
+                  <a class="dropdown-item" href="#" id="logoutButton">Logout</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- Container wrapper -->
+      </nav>
+      <!-- Navbar -->
+    </header>
+    <!--Main Navigation-->
+    <!--Main Navigation-->
+
+    <main style="margin-top: 58px">
+      <div class="container pt-4" style="text-align: left">
+        <div class="row">
+          <div class="col-lg-3 col-sm-6">
+            <div class="card gradient-1">
+              <div class="card-body">
+                <h3 class="card-title text-white">Soal</h3>
+
+                <!-- loading -->
+                <div
+                  id="loadingQuestions"
+                  class="spinner-border text-primary"
+                  role="status"
+                >
+                  <span class="sr-only">Loading...</span>
+                </div>
+
+                <div class="d-inline-block">
+                  <h2 class="text-white" id="totalQuestions"></h2>
+                  <p class="text-white mb-0">Lihat Semua Soal</p>
+                </div>
+                <span class="float-right display-5 opacity-5"
+                  ><i class="fa fa-shopping-cart"></i
+                ></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-sm-6">
+            <div class="card gradient-2">
+              <div class="card-body">
+                <h3 class="card-title text-white">User</h3>
+                <!-- loading -->
+                <div
+                  id="loadingUsers"
+                  class="spinner-border text-primary"
+                  role="status"
+                >
+                  <span class="sr-only">Loading...</span>
+                </div>
+
+                <div class="d-inline-block">
+                  <h2 class="text-white" id="totalUsers"></h2>
+
+                  <p class="text-white mb-0">Lihat Semua User</p>
+                </div>
+                <span class="float-right display-5 opacity-5"
+                  ><i class="fa fa-shopping-cart"></i
+                ></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-sm-6">
+            <div class="card gradient-3">
+              <div class="card-body">
+                <h3 class="card-title text-white">Ranking</h3>
+
+                <!-- loading -->
+                <div
+                  id="loadingRank"
+                  class="spinner-border text-primary"
+                  role="status"
+                >
+                  <span class="sr-only">Loading...</span>
+                </div>
+
+                <div class="d-inline-block">
+                  <h2 class="text-white" id="totalRank"></h2>
+
+                  <p class="text-white mb-0">lihat Rank User</p>
+                </div>
+                <span class="float-right display-5 opacity-5"
+                  ><i class="fa fa-users"></i
+                ></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="col-lg-3 col-sm-6">
+                    <div class="card gradient-4">
+                        <div class="card-body">
+                            <h3 class="card-title text-white">Products Sold</h3>
+                            <div class="d-inline-block">
+                                <h2 class="text-white">4565</h2>
+                                <p class="text-white mb-0">Jan - March 2019</p>
+                            </div>
+                            <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
+                        </div>
+                    </div>
+                </div> -->
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // Membuat fungsi logout
+      function logout() {
+        firebase
+          .auth()
+          .signOut()
+          .then(() => {
+            // Logout berhasil, hapus informasi autentikasi dari LocalStorage
+            localStorage.removeItem("userId");
+            // Redirect atau lakukan tindakan lain, misalnya, arahkan ke halaman login
+            window.location.replace("login.html");
+          })
+          .catch((error) => {
+            // Handle error
+          });
+      }
+
+      // Panggil fungsi logout saat pengguna mengklik tombol logout atau tautan logout
+      document.getElementById("logoutButton").addEventListener("click", logout);
+    </script>
+
+    <script>
+      // Ambil elemen dropdown
+      const dropdownToggle = document.getElementById("navbarDropdownMenuLink");
+
+      // Tambahkan event listener untuk mengaktifkan dropdown
+      dropdownToggle.addEventListener("click", function () {
+        const dropdownMenu = this.nextElementSibling;
+        if (dropdownMenu.style.display === "block") {
+          dropdownMenu.style.display = "none";
+        } else {
+          dropdownMenu.style.display = "block";
+        }
+      });
+
+      // Tambahkan event listener untuk menutup dropdown saat mengklik di luar dropdown
+      document.addEventListener("click", function (e) {
+        if (!dropdownToggle.contains(e.target)) {
+          const dropdownMenus = document.querySelectorAll(".dropdown-menu");
+          dropdownMenus.forEach(function (menu) {
+            menu.style.display = "none";
+          });
+        }
+      });
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyCEP9xiVWHYg4oXcqIoImbgb0ma_Dhd55U",
+        authDomain: "mastermatematika-91bae.firebaseapp.com",
+        databaseURL:
+          "https://mastermatematika-91bae-default-rtdb.firebaseio.com",
+        projectId: "mastermatematika-91bae",
+        storageBucket: "mastermatematika-91bae.appspot.com",
+        messagingSenderId: "609139117081",
+        appId: "1:609139117081:web:092ab7a617518799d2ae88",
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      let db = firebase.firestore();
+
+      const userId = localStorage.getItem("userId");
+      if (userId) {
+        // Pengguna sudah login, lakukan tindakan yang sesuai
+      } else {
+        // Pengguna belum login, arahkan ke halaman login
+        window.location.replace("login.html");
+      }
+
+      //   getData
+      function GetAllDataOnce() {
+        // Tambahkan elemen loading untuk soal
+        const loadingQuestions = document.getElementById("loadingQuestions");
+        loadingQuestions.style.display = "block"; // Tampilkan elemen loading
+
+        db.collection("Questions")
+          .get()
+          .then((querySnapshot) => {
+            var questions = [];
+            querySnapshot.forEach((doc) => {
+              questions.push(doc.data());
+            });
+
+            // Mengisi jumlah soal yang ada
+            document.getElementById("totalQuestions").textContent =
+              questions.length;
+
+            // Sembunyikan elemen loading setelah data berhasil diambil
+            loadingQuestions.style.display = "none";
+          })
+          .catch((error) => {
+            console.error("Error getting questions: ", error);
+            // Sembunyikan elemen loading jika terjadi kesalahan
+            loadingQuestions.style.display = "none";
+          });
+
+        // Tambahkan elemen loading untuk pengguna jika diperlukan
+        const loadingUsers = document.getElementById("loadingUsers");
+        loadingUsers.style.display = "block"; // Tampilkan elemen loading
+
+        db.collection("USERS")
+          .get()
+          .then((querySnapshot) => {
+            var users = [];
+            querySnapshot.forEach((doc) => {
+              users.push(doc.data());
+            });
+
+            // Mengisi jumlah pengguna yang ada
+            document.getElementById("totalUsers").textContent = users.length;
+
+            // Sembunyikan elemen loading setelah data berhasil diambil
+            loadingUsers.style.display = "none";
+          })
+          .catch((error) => {
+            console.error("Error getting users: ", error);
+            // Sembunyikan elemen loading jika terjadi kesalahan
+            loadingUsers.style.display = "none";
+          });
+
+        // Tambahkan elemen loading untuk pengguna jika diperlukan
+        const loadingRank = document.getElementById("loadingRank");
+        loadingRank.style.display = "block"; // Tampilkan elemen loading
+
+        db.collection("USERS")
+          .get()
+          .then((querySnapshot) => {
+            var users = [];
+            querySnapshot.forEach((doc) => {
+              users.push(doc.data());
+            });
+
+            // Mengisi jumlah pengguna yang ada
+            document.getElementById("totalRank").textContent = users.length;
+
+            // Sembunyikan elemen loading setelah data berhasil diambil
+            loadingRank.style.display = "none";
+          })
+          .catch((error) => {
+            console.error("Error getting users: ", error);
+            // Sembunyikan elemen loading jika terjadi kesalahan
+            loadingRank.style.display = "none";
+          });
+      }
+
+      window.onload = GetAllDataOnce;
+    </script>
+  </body>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    .card {
+      margin-bottom: 30px;
+      border: 0px;
+      border-radius: 0.625rem;
+      box-shadow: 6px 11px 41px -28px #a99de7;
+    }
+
+    .gradient-1 {
+      color: #fff !important;
+    }
+
+    .gradient-1,
+    .dropdown-mega-menu .ext-link.link-1 a,
+    .morris-hover,
+    .datamaps-hoverover {
+      background-image: linear-gradient(230deg, #759bff, #843cf6);
+    }
+
+    .gradient-2 {
+      color: #fff !important;
+    }
+
+    .gradient-2,
+    .dropdown-mega-menu .ext-link.link-3 a {
+      background-image: linear-gradient(230deg, #fc5286, #fbaaa2);
+    }
+
+    .gradient-3 {
+      color: #fff !important;
+    }
+
+    .gradient-3,
+    .dropdown-mega-menu .ext-link.link-2 a,
+    .header-right .icons .user-img .activity {
+      background-image: linear-gradient(230deg, #ffc480, #ff763b);
+    }
+
+    .gradient-4 {
+      color: #fff !important;
+    }
+
+    .gradient-4,
+    .sidebar-right .nav-tabs .nav-item .nav-link.active::after,
+    .sidebar-right .nav-tabs .nav-item .nav-link.active span i::before {
+      background-image: linear-gradient(230deg, #0e4cfd, #6a8eff);
+    }
+
+    .card .card-body {
+      padding: 1.88rem 1.81rem;
+    }
+
+    .card-body {
+      flex: 1 1 auto;
+      padding: 1.25rem;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: -15px;
+      margin-left: 15px;
+      margin-top: 3%;
+    }
+
+    @media (min-width: 1302px) {
+      .col-lg-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .col-lg-3 {
+        flex: 0 0 auto;
+        width: auto;
+      }
+    }
+
+    @media (max-width: 1331px) {
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+      }
+    }
+
+    @media (min-width: 1613px) {
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -30px;
+      }
+      .col-lg-3 {
+        flex: 0 0 auto;
+        width: 25%;
+      }
+    }
+  </style>
+</html>
