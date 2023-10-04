@@ -36,7 +36,8 @@
               <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Home</span>
             </a>
             <a
-              class="list-group-item list-group-item-action py-2 ripple active"
+              href="bank_soal.html"
+              class="list-group-item list-group-item-action py-2 ripple"
               style="border: none"
             >
               <i class="fas fa-solid fa-book fa-fw me-3"></i
@@ -57,9 +58,7 @@
               ><span>Ranking</span></a
             >
 
-            <a
-              href="user_management.html"
-              class="list-group-item list-group-item-action py-2 ripple"
+            <a class="list-group-item list-group-item-action py-2 ripple active"
               ><i class="fas fa-solid fa-users fa-fw me-3"></i
               ><span>User Management</span></a
             >
@@ -167,45 +166,33 @@
         <div class="my-3">
           <div class="card">
             <div class="card-body">
-              <h3>Bank Soal</h3>
+              <h3>User Management</h3>
             </div>
           </div>
         </div>
 
         <!-- Dropdown untuk memilih jumlah soal -->
+
         <div class="dropdown">
-          <label for="questionCount">Pilih Jumlah Soal:</label>
+          <label for="questionCount">Pilih Jumlah User:</label>
           <select id="questionCount">
             <option value="10">10 Soal</option>
             <option value="50">50 Soal</option>
             <option value="100">100 Soal</option>
             <option value="200">200 Soal</option>
           </select>
-        </div>
 
-        <div class="input-group mb-3" style="width: 50%">
-          <input
-            type="text"
-            id="searchInput"
-            class="form-control"
-            placeholder="Cari Soal..."
-          />
+          <!-- <button id="tambah_user">Tambah User</button> -->
         </div>
 
         <table class="table">
           <thead>
             <th scope="col">No</th>
-            <th scope="col" style="max-width: 250px">Soal</th>
-            <th scope="col">Jawaban A</th>
-            <th scope="col">Jawaban B</th>
-            <th scope="col">Jawaban C</th>
-            <th scope="col">Jawaban D</th>
-            <th scope="col">Isi Jawaban</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Email</th>
             <th scope="col">Hapus</th>
             <th scope="col">Edit</th>
 
-            <!-- <th scope="col">Cat</th>
-            <th scope="col">Test</th> -->
             <!-- <th scope="col">Edit</th>
             <th scope="col">Delete</th> -->
           </thead>
@@ -321,51 +308,6 @@
         GetAllDataOnce(); // Memuat data ulang dengan halaman selanjutnya
       });
 
-      const searchInput = document.getElementById("searchInput");
-
-      // Tambahkan event listener input untuk pencarian real-time
-      searchInput.addEventListener("input", () => {
-        const searchKeyword = searchInput.value.trim().toLowerCase();
-        if (searchKeyword !== "") {
-          searchQuestions(searchKeyword);
-        } else {
-          // Jika input kosong, tampilkan semua data kembali
-          GetAllDataOnce();
-        }
-      });
-
-      // Fungsi untuk mencari soal berdasarkan kata kunci secara real-time
-      function searchQuestions(keyword) {
-        // Reset halaman ke 1
-        currentPage = 1;
-
-        // Query data secara real-time (gunakan Firebase Firestore atau sumber data lainnya)
-        db.collection("Questions").onSnapshot((querySnapshot) => {
-          const filteredQuestions = [];
-          querySnapshot.forEach((doc) => {
-            const questionData = doc.data();
-            // Periksa apakah kata kunci ada di pertanyaan
-            if (
-              questionData.QUESTION.toLowerCase().includes(keyword) ||
-              questionData.A.toLowerCase().includes(keyword) ||
-              questionData.B.toLowerCase().includes(keyword) ||
-              questionData.C.toLowerCase().includes(keyword) ||
-              questionData.D.toLowerCase().includes(keyword)
-            ) {
-              filteredQuestions.push(questionData);
-            }
-          });
-          // Menampilkan hasil pencarian
-          AddAllItemsToTheTable(filteredQuestions);
-
-          // Mematikan tombol "Previous" jika ada di halaman pertama
-          prevButton.disabled = currentPage === 1;
-
-          // Mematikan tombol "Next" jika tidak ada hasil pencarian lainnya
-          nextButton.disabled = filteredQuestions.length <= questionsPerPage;
-        });
-      }
-
       //   getData
       function GetAllDataOnce() {
         // Hitung indeks awal dan akhir untuk mengambil sejumlah soal sesuai halaman
@@ -375,13 +317,29 @@
         // Memperbarui status tombol "Previous"
         prevButton.disabled = currentPage === 1;
 
-        db.collection("Questions")
+        db.collection("LATIHAN")
+          .doc("5bH7DElxluSiNFiqUFlU") // Ganti "LATIHAN_ID" dengan ID dokumen yang sesuai
+          .collection("TESTS_LIST")
+          .doc("TEST_INFO")
           .get()
           .then((querySnapshot) => {
             var questions = [];
-            querySnapshot.forEach((doc) => {
-              questions.push(doc.data());
-            });
+            if (querySnapshot.exists) {
+              const testInfoData = querySnapshot.data();
+              // Mengakses nilai "TEST1_ID"
+              const test1Id = testInfoData.TEST1_ID;
+
+              const testtime1 = testInfoData.TEST1_TIME;
+
+              // Menambahkan data ke array "questions"
+              questions.push({
+                TEST1_ID: test1Id,
+                TEST1_TIME: testtime1,
+              });
+            } else {
+              console.log("Dokumen tidak ditemukan.");
+            }
+
             // Filter data sesuai indeks awal dan akhir
             const filteredQuestions = questions.slice(startIndex, endIndex);
             AddAllItemsToTheTable(filteredQuestions);
@@ -398,16 +356,10 @@
         tbody.innerHTML = "";
         SoalDocsList.forEach((element) => {
           AddItemToTable(
-            element.QUESTION,
-            element.A,
-            element.B,
-            element.C,
-            element.D,
-            element.ANSWER,
-            element.QUESTION,
-            element.QUESTION
-            // element.CATEGORY,
-            // element.TEST
+            element.TEST1_ID,
+            element.TEST1_TIME,
+            element.TEST1_TIME,
+            element.TEST1_TIME
           );
         });
 
@@ -421,60 +373,24 @@
       var soalNo = 0;
       var tbody = document.getElementById("tbody1");
 
-      function AddItemToTable(soal, jawA, jawB, jawC, jawD, answer, id, id) {
+      function AddItemToTable(nama, email, id, id) {
         var trow = document.createElement("tr");
         var td1 = document.createElement("td");
         var td2 = document.createElement("td");
         var td3 = document.createElement("td");
         var td4 = document.createElement("td");
         var td5 = document.createElement("td");
-        var td6 = document.createElement("td");
-        var td7 = document.createElement("td");
-        var td8 = document.createElement("td");
-        var td9 = document.createElement("td");
-        // var td8 = document.createElement("td");
-        // var td9 = document.createElement("td");
 
         currentQuestionNumber++; // Menambah nomor pertanyaan saat menambahkan ke tabel
         td1.innerHTML = currentQuestionNumber;
-        td2.innerHTML = soal;
-        td3.innerHTML = jawA;
-        td4.innerHTML = jawB;
-        td5.innerHTML = jawC;
-        td6.innerHTML = jawD;
-        // Menentukan teks jawaban yang benar
-        var correctAnswerText = "";
-        switch (answer) {
-          case 1:
-            correctAnswerText =
-              "Jawaban Yang Benar <span style='color:red'> <b> A </b> </span>";
-            break;
-          case 2:
-            correctAnswerText =
-              "Jawaban Yang Benar  <span style='color:red'> <b> B </b> </span>";
-            break;
-          case 3:
-            correctAnswerText =
-              "Jawaban Yang Benar  <span style='color:red'> <b> C </b> </span>";
-            break;
-          case 4:
-            correctAnswerText =
-              "Jawaban Yang Benar  <span style='color:red'> <b> D </b> </span>";
-            break;
-          default:
-            correctAnswerText = "<b>    Belum Pilih Jawaban</b>";
-            break;
-        }
-
-        td7.innerHTML = correctAnswerText;
-        // td8.innerHTML = cat;
-        // td9.innerHTML = test;
+        td2.innerHTML = nama;
+        td3.innerHTML = email;
 
         // Tombol Hapus
         var deleteButton = document.createElement("button");
         deleteButton.innerHTML = "Hapus";
-        deleteButton.setAttribute("data-id", id);
         deleteButton.classList.add("delete-button"); // Menambahkan kelas CSS
+        deleteButton.setAttribute("data-id", id);
         deleteButton.addEventListener("click", function () {
           // Panggil fungsi untuk menghapus data berdasarkan ID dokumen
           const documentId = this.getAttribute("data-id");
@@ -484,14 +400,14 @@
         function deleteData(documentId) {
           if (confirm("Apakah Anda yakin ingin menghapus soal ini?")) {
             // Hapus data dari Firestore berdasarkan nilai "QUESTION" yang sesuai
-            db.collection("Questions")
-              .where("QUESTION", "==", documentId) // Membandingkan nilai "QUESTION" dengan documentId
+            db.collection("USERS")
+              .where("EMAIL", "==", documentId) // Membandingkan nilai "QUESTION" dengan documentId
               .get()
               .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                   doc.ref.delete().then(() => {
                     // Tampilkan pesan sukses atau lakukan tindakan lain yang sesuai
-                    alert("Soal berhasil dihapus");
+                    alert("users berhasil dihapus");
                     // Muat ulang data setelah penghapusan
                     GetAllDataOnce();
                   });
@@ -506,33 +422,27 @@
         }
 
         // Tombol Edit
-
         var editButton = document.createElement("button");
         editButton.innerHTML = "Edit";
-        editButton.classList.add("edit-button"); // Menambahkan kelas CSS
+        editButton.classList.add("edit-button");
+        deleteButton.setAttribute("data-id", id); // Menambahkan kelas CSS
         editButton.setAttribute("data-id", id);
         editButton.addEventListener("click", function () {
           // Dapatkan Document ID dari atribut data-id
           const documentId = this.getAttribute("data-id");
 
           // Arahkan ke halaman edit_soal.html dengan mengirim Document ID melalui query parameter
-          window.location.href = `edit_soal.html?documentId=${documentId}`;
+          window.location.href = `edit_user.html?documentId=${documentId}`;
         });
 
-        td8.appendChild(deleteButton);
-        td9.appendChild(editButton);
+        td4.appendChild(deleteButton);
+        td5.appendChild(editButton);
 
         trow.appendChild(td1);
         trow.appendChild(td2);
         trow.appendChild(td3);
         trow.appendChild(td4);
         trow.appendChild(td5);
-        trow.appendChild(td6);
-        trow.appendChild(td7);
-        trow.appendChild(td8);
-        trow.appendChild(td9);
-        // trow.appendChild(td8);
-        // trow.appendChild(td9);
 
         tbody.appendChild(trow);
       }
